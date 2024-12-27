@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>약 정보</title>
+</head>
+<body>
+    <h1>약 정보</h1>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% else %}
+        <p><strong>약 이름:</strong> {{ medicine.name }}</p>
+        <p><strong>수량:</strong> {{ medicine.quantity }}</p>
+        <p><strong>확률:</strong> {{ medicine.prob }}%</p>
+    {% endif %}
+</body>
+</html>
