@@ -2,7 +2,7 @@
 FROM python:3.11.9
 
 # Set working directory
-WORKDIR /postgreSQLtest/backend
+WORKDIR /test/backend
 
 # Install dependencies
 COPY requirements.txt .

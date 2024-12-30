@@ -88,8 +88,8 @@ DATABASES = {
         'NAME': 'test_db',
         'USER': 'postgres',
         'PASSWORD': '2923',
-        # 'HOST': 'host.docker.internal',
-        'HOST': 'localhost',
+        'HOST': 'host.docker.internal',
+        # 'HOST': 'localhost',
         'PORT': '5432',
     }
 }

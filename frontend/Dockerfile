@@ -1,5 +1,5 @@
 FROM node:22
-WORKDIR /postgreSQLtest/frontend
+WORKDIR /test/frontend
 COPY package.json package-lock.json ./
 RUN npm install 
 COPY . ./
