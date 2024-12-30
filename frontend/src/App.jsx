@@ -3,10 +3,12 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [name, setName] = useState("None");
-  const [quantity, setQuantity] = useState("None");
-  const [prob, setProb] = useState("None");
-
+  const [medicine, setMedicine] = useState({
+    name: "None",
+    quantity: "None",
+    prob: "None",
+  });
+  
   const clicked = () => {
     axios
       .get("http://127.0.0.1:8000", {
@@ -15,22 +17,25 @@ function App() {
         },
       })
       .then((response) => {
-        const data = response.data; // JSON 데이터를 객체로 가져옴
-        setName(data.name); // 개별 상태 업데이트
-        setQuantity(data.quantity);
-        setProb(data.prob);
+        const data = response.data;
+        setMedicine({
+          name: data.name,
+          quantity: data.quantity,
+          prob: data.prob,
+        });
       })
       .catch((err) => {
         console.error("Error fetching data:", err);
       });
   };
+  
 
   return (
     <div>
       <h1>약 정보</h1>
-      <p>이름: {name}</p>
-      <p>수량: {quantity}</p>
-      <p>확률: {prob}</p>
+      <p>이름: {medicine.name}</p>
+      <p>수량: {medicine.quantity}</p>
+      <p>확률: {medicine.prob}</p>
       <button onClick={clicked}>클릭</button>
     </div>
   );

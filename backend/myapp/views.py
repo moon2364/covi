@@ -22,6 +22,7 @@ def main(request):
             "quantity": medicine.quantity,
             "prob": str(medicine.prob),  # Decimal 값을 문자열로 변환
         }
+        print(medicine_data)
 
         # JsonResponse로 반환
         return JsonResponse(medicine_data)
