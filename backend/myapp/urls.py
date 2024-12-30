@@ -1,7 +1,7 @@
 from django.urls import path
+from .views import get_items
 from . import views
 
 urlpatterns = [
-    path('medicine/<str:name>/', views.show_medicine, name='show_medicine'),
-    path('', views.main),
+    path('api/items/', get_items, name='item-list'),  # API URL 설정,
 ]

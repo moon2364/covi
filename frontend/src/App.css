@@ -1,42 +1,99 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* General Styles */
+.app-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f9f9f9;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Layout Styles */
+.horizontal-sections {
+  display: flex;
+  gap: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.section {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.left-section {
+  flex: 1;
 }
 
-.card {
-  padding: 2em;
+.right-section {
+  flex: 1;
 }
 
-.read-the-docs {
-  color: #888;
+/* Typography */
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333333;
+}
+
+.section-description {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #555555;
+}
+
+/* Table Styles */
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.item-table th, .item-table td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.item-table th {
+  background-color: #f4f4f4;
+  color: #333333;
+  font-weight: bold;
+}
+
+.item-table td {
+  color: #333333;
+}
+
+/* Hover and Selection */
+.item-table tr {
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.item-table tr:hover {
+  background-color: #f0f8ff;
+}
+
+.item-table tr.selected {
+  background-color: #d3e9fd;
+}
+
+/* pharmacy */
+.pharmacy-table {
+  
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pharmacy-table th, .pharmacy-table td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.pharmacy-table th {
+  background-color: #f4f4f4;
+  color: #333333;
+  font-weight: bold;
+}
+
+.pharmacy-table td {
+  color: #333333;
 }

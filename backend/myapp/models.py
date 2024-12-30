@@ -1,13 +1,6 @@
 from django.db import models
 
 # Create your models here.
-class Medicine(models.Model):
-    name = models.CharField(max_length=100, blank=False)
-    quantity = models.IntegerField(blank=False)
-    prob = models.DecimalField(max_digits=5, decimal_places=2, blank=False)
-
-    class Meta:
-        db_table = 'medicine'  # 기존 테이블 이름을 유지
 
 # 품목 수량 예상일자 테이블
 class Item(models.Model):

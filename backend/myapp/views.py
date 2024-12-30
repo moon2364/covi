@@ -1,30 +1,23 @@
-from django.shortcuts import render
 from django.http import JsonResponse
-from django.http import HttpResponse
-from .models import Medicine
+from .models import Item
 
-def show_medicine(request, name):
+def get_items(request):
     try:
-        medicine = Medicine.objects.get(name=name)  # 특정 이름의 약 가져오기
-        return render(request, 'medicine_detail.html', {'medicine': medicine})
-    except Medicine.DoesNotExist:
-        return render(request, 'medicine_detail.html', {'error': '해당 이름의 약이 존재하지 않습니다.'})
+        # 모든 Item 객체 가져오기
+        items = Item.objects.all()
 
-def main(request):
-    message = request.GET.get('medicine')
-    try:
-        # Medicine 객체 가져오기
-        medicine = Medicine.objects.get(name=message)
-
-        # 딕셔너리로 데이터 구성
-        medicine_data = {
-            "name": medicine.name,
-            "quantity": medicine.quantity,
-            "prob": str(medicine.prob),  # Decimal 값을 문자열로 변환
-        }
-        print(medicine_data)
+        # Item 객체를 딕셔너리 리스트로 변환
+        items_data = [
+            {
+                "id": item.id,  # 고유 식별자 추가
+                "name": item.name,
+                "quantity": item.quantity,
+                "estimated_date": item.estimated_date.strftime('%Y-%m-%d')  # 날짜를 문자열로 변환
+            }
+            for item in items
+        ]
 
         # JsonResponse로 반환
-        return JsonResponse(medicine_data)
-    except :
-        return JsonResponse({"error": "해당 이름의 약이 존재하지 않습니다."}, status=404)
+        return JsonResponse(items_data, safe=False)  # 리스트 반환 시 safe=False 설정 필요
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
