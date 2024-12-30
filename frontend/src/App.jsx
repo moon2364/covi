@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios"; // Axios 가져오기
+import axios from "axios";
 import Header from "./components/Header";
 import "./App.css";
 import ItemList from "./components/ItemList";
@@ -7,48 +7,61 @@ import PharmacyList from "./components/PharmacyList";
 
 const App = () => {
   const [selectedItem, setSelectedItem] = useState(null);
-  const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태 추가
-  const [items, setItems] = useState([]); // DB에서 가져올 아이템 상태
-
-  const pharmacys = [
-    { id: 1, name: "가톨릭 약국", quantity: 600, prob: 89.9 },
-    { id: 2, name: "약국2", quantity: 500, prob: 71.2 },
-    { id: 3, name: "약국3", quantity: 300, prob: 98.3 },
-  ];
+  const [searchTerm, setSearchTerm] = useState("");
+  const [items, setItems] = useState([]);
+  const [pharmacys, setPharmacys] = useState([]); // 약국 정보 상태
 
   // 데이터베이스에서 아이템 가져오기
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/items/"); // Django API URL
-        setItems(response.data); // 데이터 상태 업데이트
+        const response = await axios.get("http://127.0.0.1:8000/api/items/");
+        setItems(response.data);
       } catch (error) {
         console.error("Error fetching items:", error);
       }
     };
 
     fetchItems();
-  }, []); // 컴포넌트가 처음 렌더링될 때만 실행
+  }, []);
+
+  // 선택된 품목에 대한 약국 정보 가져오기
+  useEffect(() => {
+    const fetchPharmacys = async () => {
+      if (selectedItem) {
+        try {
+          const response = await axios.get(
+            `http://127.0.0.1:8000/api/pharmacy-orders/${selectedItem.id}/`
+          );
+          setPharmacys(response.data);
+        } catch (error) {
+          console.error("Error fetching pharmacy orders:", error);
+          setPharmacys([]);
+        }
+      } else {
+        setPharmacys([]);
+      }
+    };
+
+    fetchPharmacys();
+  }, [selectedItem]); // selectedItem이 변경될 때 실행
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
   };
 
-  // 검색어에 따라 필터링된 데이터 생성
-  const filteredItems = items.filter(
-    (item) => item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredItems = items.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <div className="app-container">
-      <Header
-        onSearch={(term) => setSearchTerm(term)} // 검색어 상태 업데이트
-      />
+      <Header onSearch={(term) => setSearchTerm(term)} />
       <div className="horizontal-sections">
         <ItemList
-          items={filteredItems} // 필터링된 아이템 전달
-          selectedItem={selectedItem} // 선택된 아이템 전달
-          onItemClick={handleItemClick} // 클릭 이벤트 전달
+          items={filteredItems}
+          selectedItem={selectedItem}
+          onItemClick={handleItemClick}
         />
         <PharmacyList selectedItem={selectedItem} pharmacys={pharmacys} />
       </div>

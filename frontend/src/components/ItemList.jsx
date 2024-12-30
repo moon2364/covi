@@ -9,7 +9,7 @@ const ItemList = ({ items, selectedItem, onItemClick }) => {
       <hr />
       <p className="section-description">
         약국프로젝트 추천에 따라 주문이 예상되는 품목입니다. 주문 예상일
-        전까지 사업을 완료해 주세요!
+        전까지 사입을 완료해 주세요!
       </p>
       <table className="item-table">
         <thead>
