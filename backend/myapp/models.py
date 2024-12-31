@@ -2,28 +2,65 @@ from django.db import models
 
 # Create your models here.
 
-# 품목 수량 예상일자 테이블
-class Item(models.Model):
-    name = models.CharField(max_length=100, blank=False)  # 품목 이름
-    quantity = models.IntegerField(blank=False)  # 수량
-    estimated_date = models.DateField(blank=False)  # 주문 예상 일자
+
+class Medicine(models.Model):
+    medi_no = models.AutoField(primary_key=True)  # 의약품 ID (serial4)
+    medi_name = models.CharField(max_length=255)  # 의약품 이름
+    medi_name_detail = models.CharField(max_length=255, blank=True, null=True)  # 의약품 이름 상세
+    medi_standard = models.CharField(max_length=255, blank=True, null=True)  # 표준 규격
+    medi_packaging_type = models.CharField(max_length=255, blank=True, null=True)  # 포장 형태
+    medi_unit_qtt = models.IntegerField(blank=True, null=True)  # 단위 수량
+    medi_standard_code = models.CharField(max_length=50, blank=True, null=True)  # 의약품 표준코드
+    medi_insurance_status = models.CharField(max_length=50, blank=True, null=True)  # 보험코드 구분 (Y급여/N비급여)
+    medi_code = models.CharField(max_length=50, blank=True, null=True)  # 의약품 제조코드 (ITCO)
+    medi_top_standard_code = models.CharField(max_length=50, blank=True, null=True)  # 의약품 대표 표준코드
+    pc_no = models.CharField(max_length=50, blank=True, null=True)  # 제조사
+    medi_main_ingredient_code = models.IntegerField(blank=True, null=True)  # 주성분코드
 
     class Meta:
-        db_table = 'item'  # 테이블 이름
+        db_table = 'medicine'  # 테이블 이름
+        verbose_name = '의약품 정보'
+        verbose_name_plural = '의약품 정보'
 
     def __str__(self):
-        return self.name
-
-
-# 품목별 약국 정보 테이블
-class PharmacyOrder(models.Model):
-    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='pharmacy_orders')  # 품목
-    pharmacy_name = models.CharField(max_length=100, blank=False)  # 약국 이름
-    quantity = models.IntegerField(blank=False)  # 수량
-    order_probability = models.DecimalField(max_digits=5, decimal_places=2, blank=False)  # 주문 확률 (%)
+        return self.medi_name
+    
+    
+class BuyingScheduling(models.Model):
+    table_id = models.AutoField(primary_key=True)  # 테이블 ID
+    medi_no = models.ForeignKey(Medicine, on_delete=models.CASCADE, related_name='buying_schedules')  # 의약품 ID (ForeignKey)
+    prediction_qtt = models.BigIntegerField(blank=True, null=True)  # 예측 수량
+    medi_name = models.CharField(max_length=255, blank=True, null=True)  # 의약품 이름
+    medi_standard = models.CharField(max_length=255, blank=True, null=True)  # 표준 규격
+    medi_packaging_type = models.CharField(max_length=255, blank=True, null=True)  # 포장 형태
+    prediction_dtt = models.DateField(blank=True, null=True)  # 예상 일자
+    prediction_pharm = models.CharField(max_length=255, blank=True, null=True)  # 예상 약국
+    pharm_per_qtt = models.BigIntegerField(blank=True, null=True)  # 약국별 수량
+    order_prob = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 주문 확률
 
     class Meta:
-        db_table = 'pharmacy_order'  # 테이블 이름
+        db_table = 'buying_scheduling'
+        verbose_name = '사입 스케줄링'
+        verbose_name_plural = '사입 스케줄링'
 
     def __str__(self):
-        return f"{self.item.name} - {self.pharmacy_name}"
+        return f"Buying Scheduling ({self.table_id}): {self.medi_name}"
+    
+class PredictionOut(models.Model):
+    prediction_no = models.AutoField(primary_key=True)  # 예측 ID
+    medi_no = models.ForeignKey(Medicine, on_delete=models.CASCADE, related_name='prediction_outs')  # 의약품 ID (ForeignKey)
+    prediction_qtt = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 예측 수량
+    medi_name = models.CharField(max_length=255, blank=True, null=True)  # 의약품 이름
+    medi_standard = models.CharField(max_length=255, blank=True, null=True)  # 표준 규격
+    medi_packaging_type = models.CharField(max_length=255, blank=True, null=True)  # 포장 형태
+    amount = models.BigIntegerField(blank=True, null=True)  # 재고 수량
+    ms_rt_unit_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 단가
+    mileage = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # 마일리지
+
+    class Meta:
+        db_table = 'prediction_out'
+        verbose_name = '예측 결과'
+        verbose_name_plural = '예측 결과'
+
+    def __str__(self):
+        return f"PredictionOut ({self.prediction_no}): {self.medi_name}"

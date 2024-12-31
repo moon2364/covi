@@ -15,7 +15,7 @@ const App = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/items/");
+        const response = await axios.get("http://127.0.0.1:8000/api/buying-schedules/");
         setItems(response.data);
       } catch (error) {
         console.error("Error fetching items:", error);
@@ -31,7 +31,7 @@ const App = () => {
       if (selectedItem) {
         try {
           const response = await axios.get(
-            `http://127.0.0.1:8000/api/pharmacy-orders/${selectedItem.id}/`
+            `http://127.0.0.1:8000/api/prediction-out/${selectedItem.id}/`
           );
           setPharmacys(response.data);
         } catch (error) {

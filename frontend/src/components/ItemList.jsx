@@ -15,7 +15,7 @@ const ItemList = ({ items, selectedItem, onItemClick }) => {
         <thead>
           <tr>
             <th>품목</th>
-            <th>수량</th>
+            <th>예측 수량</th>
             <th>주문 예상 일자</th>
           </tr>
         </thead>

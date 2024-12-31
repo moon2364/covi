@@ -23,8 +23,8 @@ const PharmacyList = ({ selectedItem, pharmacys }) => {
               <thead>
                 <tr>
                   <th>주문 예상 약국</th>
-                  <th>수량</th>
-                  <th>주문 확률(%)</th>
+                  <th>재고 수량</th>
+                  <th>단가</th>
                 </tr>
               </thead>
               <tbody>
@@ -32,7 +32,7 @@ const PharmacyList = ({ selectedItem, pharmacys }) => {
                   <tr key={item.id}>
                     <td>{item.name}</td>
                     <td>{item.quantity}</td>
-                    <td>{item.prob}</td>
+                    <td>{item.unit_price}</td>
                   </tr>
                 ))}
               </tbody>
