@@ -24,9 +24,9 @@ class MedicineAdmin(admin.ModelAdmin):
     
 @admin.register(BuyingScheduling)
 class BuyingSchedulingAdmin(admin.ModelAdmin):
-    list_display = ['table_id', 'medi_no', 'medi_name', 'prediction_qtt', 'prediction_dtt', 'order_prob']  # 관리 페이지에 표시될 필드
+    list_display = ['table_id', 'medi_no', 'medi_name', 'prediction_qtt', 'prediction_dt', 'order_prob']  # 관리 페이지에 표시될 필드
     search_fields = ['medi_name', 'medi_no__medi_name']  # ForeignKey는 medi_no__medi_name으로 접근
-    list_filter = ['prediction_dtt', 'medi_packaging_type']  # 필터링 가능한 필드
+    list_filter = ['prediction_dt', 'medi_packaging_type']  # 필터링 가능한 필드
 
 
 @admin.register(PredictionOut)

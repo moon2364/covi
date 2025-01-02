@@ -12,7 +12,7 @@ def get_buying_schedules(request):
                 "id": schedule.table_id,  # 고유 식별자
                 "name": schedule.medi_name,  # 의약품 이름
                 "quantity": schedule.prediction_qtt,  # 예측 수량
-                "estimated_date": schedule.prediction_dtt.strftime('%Y-%m-%d')  # 예상 일자
+                "estimated_date": schedule.prediction_dt.strftime('%Y-%m-%d')  # 예상 일자
             }
             for schedule in schedules
         ]
