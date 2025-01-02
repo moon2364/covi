@@ -11,11 +11,11 @@ const App = () => {
   const [items, setItems] = useState([]);
   const [pharmacys, setPharmacys] = useState([]); // 약국 정보 상태
 
-  // 데이터베이스에서 아이템 가져오기
+  // 데이터베이스에서 예측 결과 가져오기
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/buying-schedules/");
+        const response = await axios.get("http://127.0.0.1:8000/api/prediction-out/");
         setItems(response.data);
       } catch (error) {
         console.error("Error fetching items:", error);
@@ -25,17 +25,17 @@ const App = () => {
     fetchItems();
   }, []);
 
-  // 선택된 품목에 대한 약국 정보 가져오기
+  // 선택된 품목에 대한 사입 스케줄 데이터 가져오기
   useEffect(() => {
     const fetchPharmacys = async () => {
       if (selectedItem) {
         try {
           const response = await axios.get(
-            `http://127.0.0.1:8000/api/prediction-out/${selectedItem.id}/`
+            `http://127.0.0.1:8000/api/buying-schedules/${selectedItem.medi_no}/`
           );
           setPharmacys(response.data);
         } catch (error) {
-          console.error("Error fetching pharmacy orders:", error);
+          console.error("Error fetching buying schedules:", error);
           setPharmacys([]);
         }
       } else {
@@ -51,7 +51,7 @@ const App = () => {
   };
 
   const filteredItems = items.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    item.medi_name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
