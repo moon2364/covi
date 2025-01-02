@@ -30,7 +30,7 @@ const PharmacyList = ({ selectedItem, pharmacys }) => {
               </thead>
               <tbody>
                 {pharmacys.map((item) => (
-                  <tr key={item.id}>
+                  <tr key={item.table_id}>
                     <td>{item.prediction_pharm}</td>
                     <td>{item.pharm_per_qtt}</td>
                     <td>{item.prediction_dt}</td>

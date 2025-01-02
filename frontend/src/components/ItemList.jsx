@@ -20,8 +20,8 @@ const ItemList = ({ items, selectedItem, onItemClick }) => {
         <tbody>
           {items.map((item) => (
             <tr
-              key={item.id}
-              className={selectedItem?.id === item.id ? "selected" : ""}
+              key={item.prediction_no}
+              className={selectedItem?.prediction_no === item.prediction_no ? "selected" : ""}
               onClick={() => onItemClick(item)} // 클릭 이벤트 실행
             >
               <td>{item.medi_name}</td>
