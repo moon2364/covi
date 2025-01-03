@@ -2,7 +2,7 @@
 FROM python:3.11.9
 
 # Set working directory
-WORKDIR /test/backend
+WORKDIR /app
 
 # Install dependencies
 COPY requirements.txt .

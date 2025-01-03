@@ -9,8 +9,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5173:5173"
-    stdin_open: true
-  
+    # stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true # 실시간 반영
+    volumes:
+      - ./frontend:/app  # 로컬 파일을 컨테이너에 마운트하여 실시간 반영
+      - /app/node_modules  # 컨테이너 내부의 node_modules 디렉토리를 별도로 유지
+
   backend:
     build:
       context: ./backend/

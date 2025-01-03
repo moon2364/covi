@@ -1,7 +1,7 @@
 FROM node:22
 
 # 작업 디렉토리 설정
-WORKDIR /test/frontend
+WORKDIR /app
 
 # package.json과 package-lock.json 복사
 COPY package.json package-lock.json ./
