@@ -42,6 +42,13 @@
 }
 
 /* Table Styles */
+/* 모든 테이블의 기본 스타일 */
+
+/* 첫 번째 컬럼 외의 나머지 컬럼은 중앙 정렬 */
+table td:not(:first-child), table th:not(:first-child) {
+  text-align: center;
+}
+
 
 .item-table {
   width: 100%;
