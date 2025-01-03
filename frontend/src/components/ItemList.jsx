@@ -2,6 +2,9 @@
 // import React from "react";
 
 const ItemList = ({ items, selectedItem, onItemClick }) => {
+  // 품목 이름 기준으로 오름차순 정렬
+  const sortedItems = [...items].sort((a, b) => a.medi_name.localeCompare(b.medi_name));
+
   return (
     <div className="section left-section">
       <h2 className="section-title">예측 결과 품목</h2>
@@ -18,7 +21,7 @@ const ItemList = ({ items, selectedItem, onItemClick }) => {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => (
+          {sortedItems.map((item) => (
             <tr
               key={item.prediction_no}
               className={selectedItem?.prediction_no === item.prediction_no ? "selected" : ""}
