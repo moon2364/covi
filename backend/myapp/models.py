@@ -43,7 +43,7 @@ class BuyingScheduling(models.Model):
         verbose_name_plural = '사입 스케줄링'
 
     def __str__(self):
-        return f"Buying Scheduling ({self.table_id}): {self.medi_name}"
+        return f"Buying Scheduling ({self.buying_id}): {self.medi_name}"
     
 class PredictionOut(models.Model):
     prediction_no = models.AutoField(primary_key=True)  # 예측 ID
