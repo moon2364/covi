@@ -13,6 +13,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* body와 html의 기본 스타일 */
+html, body {
+  margin: 0; /* 외부 마진 제거 */
+  padding: 0; /* 패딩 제거 */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* 가로 중앙 */
+  align-items: center; /* 세로 중앙 */
+  box-sizing: border-box; /* 패딩 포함 */
+}
+
 a {
   font-weight: 500;
   color: #646cff;
