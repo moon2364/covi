@@ -23,7 +23,7 @@ const PharmacyList = ({ selectedItem, pharmacys }) => {
               <thead>
                 <tr>
                   <th>예상 약국</th>
-                  <th>약국별 예상 수량</th>
+                  <th>예측 수량</th>
                   <th>예상 날짜</th>
                   <th>주문 확률</th>
                 </tr>
