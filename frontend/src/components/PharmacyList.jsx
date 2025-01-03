@@ -3,6 +3,10 @@
 // import "./PharmacyList.css";
 
 const PharmacyList = ({ selectedItem, pharmacys }) => {
+   // 예상 날짜 순으로 정렬
+   const sortedPharmacys = [...pharmacys].sort(
+    (a, b) => new Date(a.prediction_dt) - new Date(b.prediction_dt)
+  );
   return (
     <div className="section right-section">
       <h2 className="section-title">
@@ -29,7 +33,7 @@ const PharmacyList = ({ selectedItem, pharmacys }) => {
                 </tr>
               </thead>
               <tbody>
-                {pharmacys.map((item) => (
+                {sortedPharmacys.map((item) => (
                   <tr key={item.buying_id}>
                     <td>{item.prediction_pharm}</td>
                     <td>{item.pharm_per_qtt}</td>
