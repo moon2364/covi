@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='BuyingScheduling',
             fields=[
-                ('table_id', models.AutoField(primary_key=True, serialize=False)),
+                ('buying_id', models.AutoField(primary_key=True, serialize=False)),
                 ('prediction_qtt', models.BigIntegerField(blank=True, null=True)),
                 ('medi_name', models.CharField(max_length=255, blank=True, null=True)),
                 ('medi_standard', models.CharField(max_length=255, blank=True, null=True)),

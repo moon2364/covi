@@ -26,7 +26,7 @@ class Medicine(models.Model):
         return self.medi_name
     
 class BuyingScheduling(models.Model):
-    table_id = models.AutoField(primary_key=True)  # 테이블 ID
+    buying_id = models.AutoField(primary_key=True)  # 테이블 ID
     medi_no = models.ForeignKey(Medicine, on_delete=models.CASCADE, related_name='buying_schedules')  # 의약품 ID (ForeignKey)
     prediction_qtt = models.BigIntegerField(blank=True, null=True)  # 예측 수량
     medi_name = models.CharField(max_length=255, blank=True, null=True)  # 의약품 이름

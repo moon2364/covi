@@ -1,4 +1,4 @@
-# version: "3.2"
+version: "3.8"
 services:
   frontend:
     restart: always
@@ -18,7 +18,7 @@ services:
     container_name: back
     command: >
       sh -c "
-      sleep 3 &&
+      sleep 2 &&
       python manage.py migrate &&
       python create_superuser.py &&
       python manage.py runserver 0.0.0.0:8000"
