@@ -2,35 +2,38 @@ version: "3.8"
 services:
   frontend:
     restart: always
-    command : npm run dev -- --host
+    command : npm run dev -- --host --port 5003
     container_name: front
-    build:
-      context: ./frontend/
-      dockerfile: Dockerfile
+    # build:
+    #   context: ./frontend/
+    #   dockerfile: Dockerfile
+    image: front
     ports:
-      - "5173:5173"
+      - "5003:5003"
     # stdin_open: true
     environment:
       - CHOKIDAR_USEPOLLING=true # 실시간 반영
-    volumes:
-      - ./frontend:/app  # 로컬 파일을 컨테이너에 마운트하여 실시간 반영
-      - /app/node_modules  # 컨테이너 내부의 node_modules 디렉토리를 별도로 유지
+      
+    # volumes:
+    #   - ./frontend:/app  # 로컬 파일을 컨테이너에 마운트하여 실시간 반영
+    #   - /app/node_modules  # 컨테이너 내부의 node_modules 디렉토리를 별도로 유지
 
   backend:
-    build:
-      context: ./backend/
-      dockerfile: Dockerfile
+    # build:
+    #   context: ./backend/
+    #   dockerfile: Dockerfile
+    image: back
     container_name: back
     command: >
       sh -c "
       sleep 2 &&
       python manage.py migrate &&
       python create_superuser.py &&
-      python manage.py runserver 0.0.0.0:8000"
-    volumes:
-      - ./backend:/app
+      python manage.py runserver 0.0.0.0:5010"
+    # volumes:
+    #   - ./backend:/app
     ports:
-      - "8000:8000"
+      - "5010:5010"
     depends_on:
       - db
     environment:
@@ -43,6 +46,7 @@ services:
       POSTGRES_HOST: db
       POSTGRES_PORT: 5432
       DJANGO_SETTINGS_MODULE: backend.settings
+      
     
   db:
     image: postgres:latest
@@ -53,7 +57,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: database
     ports:
-      - "5433:5432"
+      - "5020:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
 

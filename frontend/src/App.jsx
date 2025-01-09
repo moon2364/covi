@@ -6,7 +6,7 @@ import ItemList from "./components/ItemList";
 import PharmacyList from "./components/PharmacyList";
 
 const App = () => {
-  const URL = "http://localhost:8000";
+  const URL = "http://localhost:5010";
   const [selectedItem, setSelectedItem] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [items, setItems] = useState([]);
